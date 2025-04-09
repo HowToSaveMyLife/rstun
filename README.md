@@ -4,7 +4,7 @@ rstun
 
 **This adds parameter congestion_control, default is BBR, other options are COPA, BBR2, CUBIC and NEW_RENO. Complete Options for rstund and rstunc are listed below.**
 
-**COPA is implemented in [quinn-copa](https://github.com/HowToSaveMyLife/quinn-copa)**
+**The dependencies path of quinn and quinn-proto need to be changed. COPA is implemented in [quinn-copa](https://github.com/HowToSaveMyLife/quinn-copa)**
 
 A TCP/UDP tunnel over QUIC written in Rust.
 
