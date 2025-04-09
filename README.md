@@ -1,5 +1,10 @@
 rstun
 =====
+**Original [rstun](https://github.com/neevek/rstun)**
+
+**This adds parameter congestion_control, default is BBR, other options are COPA, BBR2, CUBIC and NEW_RENO. Complete Options for rstund and rstunc are listed below.**
+
+**COPA is implemented in [quinn-copa](https://github.com/HowToSaveMyLife/quinn-copa)**
 
 A TCP/UDP tunnel over QUIC written in Rust.
 
@@ -110,6 +115,8 @@ Options:
           Udp idle timeout in milliseconds for the connection [default: 30000]
   -l, --loglevel <LOGLEVEL>
           [default: I] [possible values: T, D, I, W, E]
+  -g, --congestion-control <CONGESTION_CONTROL>
+          Congestion control algorithm [default: BBR] [possible values: BBR, CUBIC, NEW_RENO, BBR2, COPA]
   -h, --help
           Print help
   -V, --version
@@ -161,6 +168,8 @@ Options:
           e.g. "1.1.1.1,8.8.8.8" [default: ]
   -l, --loglevel <LOGLEVEL>
           Log level [default: I] [possible values: T, D, I, W, E]
+  -g, --congestion-control <CONGESTION_CONTROL>
+          Congestion control algorithm [default: BBR] [possible values: BBR, CUBIC, NEW_RENO, BBR2, COPA]
   -h, --help
           Print help
   -V, --version
