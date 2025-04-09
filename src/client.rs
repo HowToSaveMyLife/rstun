@@ -276,7 +276,26 @@ impl Client {
         transport_cfg.stream_receive_window(quinn::VarInt::from_u32(1024 * 1024));
         transport_cfg.receive_window(quinn::VarInt::from_u32(1024 * 1024 * 2));
         transport_cfg.send_window(1024 * 1024 * 2);
-        transport_cfg.congestion_controller_factory(Arc::new(congestion::BbrConfig::default()));
+
+        match self.config.cc_mode.as_str() {
+            "COPA" => {
+                transport_cfg.congestion_controller_factory(Arc::new(congestion::CopaConfig::default()));
+            }
+            "BBR" => {
+                transport_cfg.congestion_controller_factory(Arc::new(congestion::BbrConfig::default()));
+            }
+            "CUBIC" => {
+                transport_cfg.congestion_controller_factory(Arc::new(congestion::CubicConfig::default()));
+            }
+            "BBR2" => {
+                transport_cfg.congestion_controller_factory(Arc::new(congestion::BbrConfig2::default()));
+            }
+            _ => {
+                transport_cfg.congestion_controller_factory(Arc::new(congestion::CopaConfig::default()));
+            }
+        }
+
+        // transport_cfg.congestion_controller_factory(Arc::new(congestion::CopaConfig::default()));
         transport_cfg.max_concurrent_bidi_streams(VarInt::from_u32(1024));
 
         if self.config.quic_timeout_ms > 0 {

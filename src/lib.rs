@@ -172,6 +172,7 @@ pub struct ClientConfig {
     pub dns_servers: Vec<String>,
     pub workers: usize,
     pub mode: &'static str,
+    pub cc_mode: String,
 }
 
 #[derive(Debug, Clone)]
@@ -192,6 +193,7 @@ pub struct ServerConfig {
     pub dashboard_server: String,
     /// user:password
     pub dashboard_server_credential: String,
+    pub cc_mode: String,
 }
 
 impl ClientConfig {
@@ -210,6 +212,7 @@ impl ClientConfig {
         mut quic_timeout_ms: u64,
         mut tcp_timeout_ms: u64,
         mut udp_timeout_ms: u64,
+        cc_mode: &str,
     ) -> Result<ClientConfig> {
         if tcp_addr_mapping.is_empty() && udp_addr_mapping.is_empty() {
             log_and_bail!("must specify either --tcp-mapping or --udp-mapping, or both");
@@ -260,6 +263,7 @@ impl ClientConfig {
 
             TUNNEL_MODE_OUT
         };
+        config.cc_mode = cc_mode.to_string();
 
         Ok(config)
     }

@@ -24,6 +24,7 @@ fn main() {
         args.quic_timeout_ms,
         args.tcp_timeout_ms,
         args.udp_timeout_ms,
+        &args.congestion_control,
     )
     .map_err(|e| {
         error!("{e}");
@@ -126,4 +127,9 @@ struct RstuncArgs {
             _ => "info",
         }.to_string()))]
     loglevel: String,
+
+    /// Congestion control algorithm
+    #[arg(short = 'g', long, default_value_t = String::from("BBR"),
+        value_parser = PossibleValuesParser::new(["BBR", "CUBIC", "NEW_RENO", "BBR2", "COPA"]).map(|v| v.to_string()))]
+    congestion_control: String,
 }

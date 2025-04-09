@@ -128,7 +128,24 @@ impl Server {
         transport_cfg.stream_receive_window(quinn::VarInt::from_u32(1024 * 1024));
         transport_cfg.receive_window(quinn::VarInt::from_u32(1024 * 1024 * 2));
         transport_cfg.send_window(1024 * 1024 * 2);
-        transport_cfg.congestion_controller_factory(Arc::new(congestion::BbrConfig::default()));
+        match config.cc_mode.as_str() {
+            "COPA" => {
+                transport_cfg.congestion_controller_factory(Arc::new(congestion::CopaConfig::default()));
+            }
+            "BBR" => {
+                transport_cfg.congestion_controller_factory(Arc::new(congestion::BbrConfig::default()));
+            }
+            "CUBIC" => {
+                transport_cfg.congestion_controller_factory(Arc::new(congestion::CubicConfig::default()));
+            }
+            "BBR2" => {
+                transport_cfg.congestion_controller_factory(Arc::new(congestion::BbrConfig2::default()));
+            }
+            _ => {
+                transport_cfg.congestion_controller_factory(Arc::new(congestion::CopaConfig::default()));
+            }
+        }
+        // transport_cfg.congestion_controller_factory(Arc::new(congestion::CopaConfig::default()));
         if config.quic_timeout_ms > 0 {
             let timeout = IdleTimeout::from(VarInt::from_u32(config.quic_timeout_ms as u32));
             transport_cfg.max_idle_timeout(Some(timeout));

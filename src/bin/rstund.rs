@@ -57,6 +57,7 @@ async fn run(mut args: RstundArgs) -> Result<()> {
         udp_timeout_ms: args.udp_timeout_ms,
         dashboard_server: "".to_string(),
         dashboard_server_credential: "".to_string(),
+        cc_mode: args.congestion_control,
     };
 
     let mut server = Server::new(config);
@@ -158,4 +159,9 @@ struct RstundArgs {
             _ => "info",
         }.to_string()))]
     loglevel: String,
+
+    /// Congestion control algorithm
+    #[arg(short = 'g', long, default_value_t = String::from("BBR"),
+        value_parser = PossibleValuesParser::new(["BBR", "CUBIC", "NEW_RENO", "BBR2", "COPA"]).map(|v| v.to_string()))]
+    congestion_control: String,
 }
