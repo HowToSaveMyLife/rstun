@@ -290,6 +290,12 @@ impl Client {
             "BBR2" => {
                 transport_cfg.congestion_controller_factory(Arc::new(congestion::BbrConfig2::default()));
             }
+            "COPAP" => {
+                transport_cfg.congestion_controller_factory(Arc::new(congestion::CopapConfig::default()));
+            }
+            "NEW_RENO" => {
+                transport_cfg.congestion_controller_factory(Arc::new(congestion::NewRenoConfig::default()));
+            }
             _ => {
                 transport_cfg.congestion_controller_factory(Arc::new(congestion::CopaConfig::default()));
             }

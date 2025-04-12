@@ -162,6 +162,6 @@ struct RstundArgs {
 
     /// Congestion control algorithm
     #[arg(short = 'g', long, default_value_t = String::from("BBR"),
-        value_parser = PossibleValuesParser::new(["BBR", "CUBIC", "NEW_RENO", "BBR2", "COPA"]).map(|v| v.to_string()))]
+        value_parser = PossibleValuesParser::new(["BBR", "CUBIC", "NEW_RENO", "BBR2", "COPA", "COPAP"]).map(|v| v.to_string()))]
     congestion_control: String,
 }
