@@ -147,6 +147,9 @@ impl Server {
             "NEW_RENO" => {
                 transport_cfg.congestion_controller_factory(Arc::new(congestion::NewRenoConfig::default()));
             }
+            "SPROUT" => {
+                transport_cfg.congestion_controller_factory(Arc::new(congestion::SproutConfig::default()));
+            }
             _ => {
                 transport_cfg.congestion_controller_factory(Arc::new(congestion::CopaConfig::default()));
             }
