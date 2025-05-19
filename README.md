@@ -2,9 +2,9 @@ rstun
 =====
 **Original [rstun](https://github.com/neevek/rstun)**
 
-**This adds parameter congestion_control, default is BBR, other options are COPA, COPAP(COPA PLUS), BBR2, CUBIC and NEW_RENO. Complete Options for rstund and rstunc are listed below.**
+**This adds parameter congestion_control, default is BBR, other options are COPA, COPAP(COPA PLUS), BBR2, CUBIC and NEW_RENO, SPROUT. Complete Options for rstund and rstunc are listed below.**
 
-**The dependencies path of quinn and quinn-proto need to be changed. COPA is implemented in [quinn-copa](https://github.com/HowToSaveMyLife/quinn-copa)**
+**The dependencies path of quinn and quinn-proto need to be changed. COPA、COPAP、SPROUT are implemented in [quinn-copa](https://github.com/HowToSaveMyLife/quinn-copa)**
 
 A TCP/UDP tunnel over QUIC written in Rust.
 
@@ -116,7 +116,7 @@ Options:
   -l, --loglevel <LOGLEVEL>
           [default: I] [possible values: T, D, I, W, E]
   -g, --congestion-control <CONGESTION_CONTROL>
-          Congestion control algorithm [default: BBR] [possible values: BBR, CUBIC, NEW_RENO, BBR2, COPA, COPAP]
+          Congestion control algorithm [default: BBR] [possible values: BBR, CUBIC, NEW_RENO, BBR2, COPA, COPAP, SPROUT]
   -h, --help
           Print help
   -V, --version
@@ -169,7 +169,7 @@ Options:
   -l, --loglevel <LOGLEVEL>
           Log level [default: I] [possible values: T, D, I, W, E]
   -g, --congestion-control <CONGESTION_CONTROL>
-          Congestion control algorithm [default: BBR] [possible values: BBR, CUBIC, NEW_RENO, BBR2, COPA, COPAP]
+          Congestion control algorithm [default: BBR] [possible values: BBR, CUBIC, NEW_RENO, BBR2, COPA, COPAP, SPROUT]
   -h, --help
           Print help
   -V, --version
